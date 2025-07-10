@@ -70,8 +70,14 @@
       <h2 class="text-2xl font-semibold mb-4 text-yellow-800">Complete Your Purchase</h2>
       <p class="text-sm text-gray-600 mb-6">Fill out the form below. After generating your purchase form, upload it and send to us via WhatsApp or email.</p>
 
+      <div class="mb-4 text-gray-700">
+        <strong>Breed:</strong> <span id="breedName">Loading...</span><br>
+        <strong>Total Price:</strong> $<span id="totalPrice">...</span><br>
+        <strong>Amount to Pay Now (70%):</strong> $<span id="seventyPercent">...</span>
+      </div>
+
       <form id="purchaseForm" class="space-y-5">
-        <input type="hidden" id="dogId" value="dog01" />
+        <input type="hidden" id="dogId" />
 
         <div>
           <label class="block mb-1 font-semibold">Full Name</label>
@@ -130,40 +136,63 @@
   </footer>
 
 <script>
-  let dogPrice = 0;
-  let dogBreed = "";
+  const dogs = [
+    { id: "dog01", breed: "Golden Retriever", price: 1396 },
+    { id: "dog02", breed: "French Bulldog", price: 1073 },
+    { id: "dog03", breed: "German Shepherd", price: 1476 },
+    { id: "dog04", breed: "Poodle", price: 939 },
+    { id: "dog05", breed: "Bulldog", price: 1038 },
+    { id: "dog06", breed: "Beagle", price: 1415 },
+    { id: "dog07", breed: "Rottweiler", price: 1158 },
+    { id: "dog08", breed: "Dachshund", price: 1489 },
+    { id: "dog09", breed: "Great Dane", price: 1055 },
+    { id: "dog10", breed: "Siberian Husky", price: 1006 },
+    { id: "dog11", breed: "Labrador Retriever", price: 1320 },
+    { id: "dog12", breed: "Chihuahua", price: 1353 },
+    { id: "dog13", breed: "Doberman", price: 894 },
+    { id: "dog14", breed: "Cocker Spaniel", price: 1071 },
+    { id: "dog15", breed: "Boxer", price: 1096 },
+    { id: "dog16", breed: "Australian Shepherd", price: 1361 },
+    { id: "dog17", breed: "Shih Tzu", price: 1476 },
+    { id: "dog18", breed: "Pug", price: 860 },
+    { id: "dog19", breed: "Maltese", price: 1379 },
+    { id: "dog20", breed: "Boston Terrier", price: 893 },
+    { id: "dog21", breed: "Cavalier King Charles", price: 1365 },
+    { id: "dog22", breed: "Border Collie", price: 960 },
+    { id: "dog23", breed: "Bichon Frise", price: 832 },
+    { id: "dog24", breed: "Akita", price: 1017 },
+    { id: "dog25", breed: "Samoyed", price: 822 },
+    { id: "dog26", breed: "Weimaraner", price: 1443 },
+    { id: "dog27", breed: "Bernese Mountain Dog", price: 1494 },
+    { id: "dog28", breed: "Basenji", price: 1146 },
+    { id: "dog29", breed: "Alaskan Malamute", price: 1439 },
+    { id: "dog30", breed: "Whippet", price: 997 }
+  ];
 
-  // Fetch the dog data first
   const dogId = new URLSearchParams(window.location.search).get("id") || "dog01";
   document.getElementById("dogId").value = dogId;
 
-  fetch('http://localhost:3000/api/dogs')
-    .then(res => res.json())
-    .then(dogs => {
-      const dog = dogs.find(d => d.id === dogId);
-      if (dog) {
-        dogPrice = dog.price;
-        dogBreed = dog.breed;
-      }
-    });
+  const dog = dogs.find(d => d.id === dogId);
+  const seventy = Math.round(dog.price * 0.7);
+
+  document.getElementById("breedName").textContent = dog.breed;
+  document.getElementById("totalPrice").textContent = dog.price;
+  document.getElementById("seventyPercent").textContent = seventy;
 
   document.getElementById('purchaseForm').addEventListener('submit', function (e) {
     e.preventDefault();
-
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
     const address = document.getElementById('address').value;
     const kids = document.getElementById('haveKids').value;
 
-    const seventyPercent = Math.round(dogPrice * 0.7);
-
     const content = `Dog Purchase Form
 
 Dog ID: ${dogId}
-Breed: ${dogBreed}
-Total Price: $${dogPrice}
-Amount to Pay (70%): $${seventyPercent}
+Breed: ${dog.breed}
+Total Price: $${dog.price}
+Amount to Pay (70%): $${seventy}
 
 Name: ${name}
 Email: ${email}
@@ -175,20 +204,18 @@ Please contact us with this form to proceed.`;
 
     const blob = new Blob([content], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
-    const downloadLink = document.getElementById('downloadLink');
-    downloadLink.href = url;
-    downloadLink.download = `PurchaseForm_${dogId}.txt`;
+    document.getElementById('downloadLink').href = url;
+    document.getElementById('downloadLink').download = `PurchaseForm_${dogId}.txt`;
 
-    const msg = encodeURIComponent(`Hi, I want to buy Dog ID: ${dogId}. My name is ${name}. I've attached the purchase form.`);
+    const msg = encodeURIComponent(`Hi, I want to buy Dog ID: ${dogId} (${dog.breed}). My name is ${name}. I've attached the form.`);
     const phoneNumber = '08166960277';
 
     document.getElementById('whatsappLink').href = `https://wa.me/${phoneNumber}?text=${msg}`;
     document.getElementById('emailLink').href = `mailto:info@dogmarketplace.com?subject=Dog Purchase - ${dogId}&body=${msg}`;
-
     document.getElementById('downloadSection').classList.remove('hidden');
   });
 
-  // Loader & Page Transition
+  // Loader
   window.addEventListener("load", () => {
     document.getElementById("loader").style.opacity = "0";
     setTimeout(() => {
@@ -196,15 +223,14 @@ Please contact us with this form to proceed.`;
     }, 500);
   });
 
+  // Fade transition
   document.querySelectorAll("a").forEach(link => {
     const href = link.getAttribute("href");
     if (href && !href.startsWith("#") && !link.hasAttribute("target")) {
       link.addEventListener("click", e => {
         e.preventDefault();
         document.documentElement.classList.add("fade-out");
-        setTimeout(() => {
-          window.location = href;
-        }, 300);
+        setTimeout(() => { window.location = href; }, 300);
       });
     }
   });
