@@ -1,0 +1,140 @@
+<!-- frontend/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dog Marketplace - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .card-3d {
+      transition: transform 0.5s ease;
+    }
+    .card-3d:hover {
+      transform: rotateY(10deg) rotateX(5deg) scale(1.03);
+    }
+
+    /* Loader styles */
+    #loader {
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+
+    #paw {
+      width: 60px;
+      height: 60px;
+      animation: bounce 1s infinite ease-in-out;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-25px); }
+    }
+
+    /* Page fade effect */
+    html.fade-out {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-yellow-50 to-white min-h-screen">
+
+  <!-- Loader -->
+  <div id="loader">
+    <img id="paw" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Loading..." />
+  </div>
+
+  <!-- Hero Section -->
+  <section class="flex flex-col md:flex-row items-center justify-between px-8 md:px-20 py-20">
+    <div class="md:w-1/2 space-y-6">
+      <h1 class="text-4xl md:text-6xl font-bold text-gray-800">Find Your Perfect Pup</h1>
+      <p class="text-lg text-gray-600">We connect dog lovers with trusted sellers across the USA. 70% payment upfront, safe delivery, and verified sellers.</p>
+      <div class="space-x-4 mt-4">
+        <a href="listings.html" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-full shadow-lg">Browse Dogs</a>
+        <a href="reviews.html" class="text-yellow-700 font-semibold underline">Read Reviews</a>
+        <a href="tracking.html" class="text-yellow-700 font-semibold underline ml-4">Track Order</a>
+      </div>
+    </div>
+    <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
+      <div class="w-[300px] h-[300px] bg-white rounded-3xl shadow-xl card-3d p-6">
+        <img src="https://cdn.pixabay.com/photo/2016/02/19/10/00/dog-1207816_960_720.jpg" alt="Cute Puppy" class="rounded-xl w-full h-full object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Highlights -->
+  <section class="text-center py-16 bg-white">
+    <h2 class="text-3xl font-bold mb-6 text-gray-800">Why Choose Us?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 px-10">
+      <div class="p-6 rounded-xl shadow-lg card-3d bg-yellow-50">
+        <h3 class="text-xl font-semibold mb-2">Trusted Sellers</h3>
+        <p class="text-gray-600">We verify all breeders and sellers to ensure healthy and safe dogs.</p>
+      </div>
+      <div class="p-6 rounded-xl shadow-lg card-3d bg-yellow-50">
+        <h3 class="text-xl font-semibold mb-2">Easy Communication</h3>
+        <p class="text-gray-600">Chat with us via WhatsApp or email – quick and easy.</p>
+      </div>
+      <div class="p-6 rounded-xl shadow-lg card-3d bg-yellow-50">
+        <h3 class="text-xl font-semibold mb-2">Delivery & Tracking</h3>
+        <p class="text-gray-600">Track your order easily with a unique tracking ID after purchase.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-yellow-100 py-10 px-6 mt-12 text-gray-700">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h4 class="text-xl font-bold mb-4">Dog Marketplace</h4>
+        <p>Connecting dog lovers to trusted breeders across the USA. Headquartered in New York. Secure payments, verified sellers, and transparent delivery tracking.</p>
+        <p class="mt-4">&copy; 2025 Dog Marketplace. All rights reserved.</p>
+      </div>
+      <div>
+        <h4 class="text-xl font-bold mb-4">Our Trusted Breeder Partners</h4>
+        <ul class="list-disc list-inside space-y-2 text-gray-700">
+          <li><a href="#" class="hover:text-yellow-600 font-medium">Golden Acres Pups (Texas)</a></li>
+          <li><a href="#" class="hover:text-yellow-600 font-medium">Blue Ridge Breeders (Georgia)</a></li>
+          <li><a href="#" class="hover:text-yellow-600 font-medium">Urban Paw House (California)</a></li>
+          <li><a href="#" class="hover:text-yellow-600 font-medium">Maple Kennels (New York)</a></li>
+          <li><a href="#" class="hover:text-yellow-600 font-medium">Loyal Tails Breeding Co. (Florida)</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Loader and Transition Script -->
+  <script>
+    window.addEventListener("load", () => {
+      document.getElementById("loader").style.opacity = "0";
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+      }, 500);
+    });
+
+    document.querySelectorAll("a").forEach(link => {
+      const href = link.getAttribute("href");
+      if (href && !href.startsWith("#") && !link.hasAttribute("target")) {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          document.documentElement.classList.add("fade-out");
+          setTimeout(() => {
+            window.location = href;
+          }, 300);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

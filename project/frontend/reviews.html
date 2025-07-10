@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Reviews - Dog Marketplace</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: url('https://images.unsplash.com/photo-1612532755858-7ddbe4ac1058?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(14px);
+      border-radius: 1rem;
+      box-shadow: 0 4px 40px rgba(0, 0, 0, 0.1);
+    }
+    .card {
+      animation: fadeIn 0.5s ease-in;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="text-gray-800">
+
+  <header class="bg-yellow-100/80 shadow py-6 px-4 sticky top-0 z-10">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <h1 class="text-3xl font-bold text-yellow-800">🐾 Customer Reviews</h1>
+      <a href="index.html" class="text-yellow-700 hover:underline text-sm">&larr; Back to Home</a>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto py-12 px-4">
+    <section class="glass p-8 mb-12">
+      <h2 class="text-2xl font-semibold mb-4">💬 Write Your Review</h2>
+      <form id="reviewForm" class="space-y-4">
+        <input type="email" id="email" placeholder="Your email" required class="w-full p-3 rounded-lg border border-yellow-300 shadow-sm">
+        <textarea id="reviewText" placeholder="Write your review here..." rows="4" required class="w-full p-3 rounded-lg border border-yellow-300 shadow-sm"></textarea>
+        <button type="submit" class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600">Submit Review</button>
+      </form>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold mb-6 text-white drop-shadow">🌟 What People Are Saying</h2>
+      <div id="reviewContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dynamic reviews -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-6 text-sm text-white bg-yellow-800/60">
+    &copy; 2025 Dog Marketplace. Headquartered in New York, USA.
+  </footer>
+
+  <script>
+    const sampleEmails = ["emma@gmail.com", "liam@yahoo.com", "olivia@hotmail.com", "noah@live.com", "sophia@gmail.com", "aiden@aol.com", "mason@outlook.com", "isabella@ymail.com", "lucas@gmail.com", "mia@yahoo.com"];
+
+    const longReviews = [
+      "I received my Labrador puppy two weeks ago and I am absolutely in love...",
+      "My golden retriever puppy arrived with full documentation, vaccines...",
+      "Honestly, this has been one of the best decisions I've made. My daughter and I...",
+      "What a fantastic experience! We were nervous about buying online...",
+      "I have dealt with many breeders over the years but this is the first time I’ve used...",
+      "Thank you for sending our twin poodles safe and sound. We wanted a pair..."
+    ];
+
+    const shortReviews = [
+      "Super smooth process. Love my puppy!",
+      "Perfect match. Thank you!",
+      "Highly legit service. So happy.",
+      "Healthy and adorable pup. I'm thrilled.",
+      "Breeder was kind. Great platform!"
+    ];
+
+    const mediumReviews = [
+      "Thanks a lot for the help. My puppy is adjusting well...",
+      "Appreciate the help from the support staff...",
+      "I got a vaccinated, clean, and super fluffy chow chow...",
+      "Received everything on time. Appreciate the clear instructions...",
+      "Very satisfied. I got everything promised..."
+    ];
+
+    const questions = [
+      "Can I request two puppies from the same litter (twins)?",
+      "Is it possible to speak with the breeder before paying the 70%?",
+      "Do you offer international delivery or only within the US?",
+      "What happens if I don’t have WhatsApp? Can I use email instead?",
+      "Can I pick the gender of the puppy when ordering?",
+      "How do I track my order once the dog is on the way?"
+    ];
+
+    const allReviews = [...longReviews, ...shortReviews, ...mediumReviews, ...questions];
+    const shuffled = [...allReviews, ...allReviews].sort(() => Math.random() - 0.5).slice(0, 84);
+
+    function randomDateInLast3Months() {
+      const today = new Date();
+      const past = new Date(today.setMonth(today.getMonth() - 3));
+      const randomTime = past.getTime() + Math.random() * (Date.now() - past.getTime());
+      return new Date(randomTime).toDateString();
+    }
+
+    const reviewContainer = document.getElementById("reviewContainer");
+
+    shuffled.forEach(text => {
+      const email = sampleEmails[Math.floor(Math.random() * sampleEmails.length)];
+      const maskedEmail = email.replace(/(.{3})(.*)(@.*)/, (_, a, b, c) => `${a}${'*'.repeat(b.length)}${c}`);
+      const date = randomDateInLast3Months();
+
+      const div = document.createElement('div');
+      div.className = 'glass p-6 rounded-xl card';
+      div.innerHTML = `
+        <div class="mb-2 flex justify-between items-center">
+          <span class="font-semibold text-yellow-700">${maskedEmail}</span>
+          <span class="text-sm text-gray-500">${date}</span>
+        </div>
+        <p class="text-gray-700">${text}</p>
+      `;
+      reviewContainer.appendChild(div);
+    });
+
+    // Handle new review form submission
+    document.getElementById("reviewForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const reviewText = document.getElementById("reviewText").value;
+      const masked = email.replace(/(.{3})(.*)(@.*)/, (_, a, b, c) => `${a}${'*'.repeat(b.length)}${c}`);
+      const now = new Date().toDateString();
+
+      const div = document.createElement('div');
+      div.className = 'glass p-6 rounded-xl card';
+      div.innerHTML = `
+        <div class="mb-2 flex justify-between items-center">
+          <span class="font-semibold text-yellow-700">${masked}</span>
+          <span class="text-sm text-gray-500">${now}</span>
+        </div>
+        <p class="text-gray-700">${reviewText}</p>
+      `;
+      reviewContainer.prepend(div);
+      this.reset();
+    });
+  </script>
+</body>
+</html>
