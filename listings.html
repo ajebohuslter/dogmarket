@@ -1,4 +1,3 @@
-<!-- frontend/listings.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,351 +80,113 @@
     <p>&copy; 2025 Dog Marketplace | Headquartered in New York, USA</p>
   </footer>
 
-  <!-- JS: Fetch & Filter Dogs -->
-<script>
-  const dogs =[
-  {
-    "id": "dog01",
-    "breed": "Golden Retriever",
-    "age": "2 months",
-    "gender": "Male",
-    "price": 1396,
-    "location": "Atlanta, GA",
-    "image": "https://placedog.net/500?id=1"
-  },
-  {
-    "id": "dog02",
-    "breed": "French Bulldog",
-    "age": "3 months",
-    "gender": "Female",
-    "price": 1073,
-    "location": "Denver, CO",
-    "image": "https://placedog.net/500?id=2"
-  },
-  {
-    "id": "dog03",
-    "breed": "German Shepherd",
-    "age": "5 months",
-    "gender": "Female",
-    "price": 1476,
-    "location": "Austin, TX",
-    "image": "https://placedog.net/500?id=3"
-  },
-  {
-    "id": "dog04",
-    "breed": "Poodle",
-    "age": "5 months",
-    "gender": "Male",
-    "price": 939,
-    "location": "Portland, OR",
-    "image": "https://placedog.net/500?id=4"
-  },
-  {
-    "id": "dog05",
-    "breed": "Bulldog",
-    "age": "3 months",
-    "gender": "Female",
-    "price": 1038,
-    "location": "Brooklyn, NY",
-    "image": "https://placedog.net/500?id=5"
-  },
-  {
-    "id": "dog06",
-    "breed": "Beagle",
-    "age": "3 months",
-    "gender": "Female",
-    "price": 1415,
-    "location": "Los Angeles, CA",
-    "image": "https://placedog.net/500?id=6"
-  },
-  {
-    "id": "dog07",
-    "breed": "Rottweiler",
-    "age": "3 months",
-    "gender": "Female",
-    "price": 1158,
-    "location": "Brooklyn, NY",
-    "image": "https://placedog.net/500?id=7"
-  },
-  {
-    "id": "dog08",
-    "breed": "Dachshund",
-    "age": "6 months",
-    "gender": "Female",
-    "price": 1489,
-    "location": "Austin, TX",
-    "image": "https://placedog.net/500?id=8"
-  },
-  {
-    "id": "dog09",
-    "breed": "Great Dane",
-    "age": "3 months",
-    "gender": "Female",
-    "price": 1055,
-    "location": "Atlanta, GA",
-    "image": "https://placedog.net/500?id=9"
-  },
-  {
-    "id": "dog10",
-    "breed": "Siberian Husky",
-    "age": "6 months",
-    "gender": "Female",
-    "price": 1006,
-    "location": "Atlanta, GA",
-    "image": "https://placedog.net/500?id=10"
-  },
-  {
-    "id": "dog11",
-    "breed": "Labrador Retriever",
-    "age": "2 months",
-    "gender": "Female",
-    "price": 1320,
-    "location": "Los Angeles, CA",
-    "image": "https://placedog.net/500?id=11"
-  },
-  {
-    "id": "dog12",
-    "breed": "Chihuahua",
-    "age": "6 months",
-    "gender": "Female",
-    "price": 1353,
-    "location": "Portland, OR",
-    "image": "https://placedog.net/500?id=12"
-  },
-  {
-    "id": "dog13",
-    "breed": "Doberman",
-    "age": "6 months",
-    "gender": "Female",
-    "price": 894,
-    "location": "Chicago, IL",
-    "image": "https://placedog.net/500?id=13"
-  },
-  {
-    "id": "dog14",
-    "breed": "Cocker Spaniel",
-    "age": "3 months",
-    "gender": "Male",
-    "price": 1071,
-    "location": "Miami, FL",
-    "image": "https://placedog.net/500?id=14"
-  },
-  {
-    "id": "dog15",
-    "breed": "Boxer",
-    "age": "4 months",
-    "gender": "Female",
-    "price": 1096,
-    "location": "Denver, CO",
-    "image": "https://placedog.net/500?id=15"
-  },
-  {
-    "id": "dog16",
-    "breed": "Australian Shepherd",
-    "age": "3 months",
-    "gender": "Male",
-    "price": 1361,
-    "location": "Austin, TX",
-    "image": "https://placedog.net/500?id=16"
-  },
-  {
-    "id": "dog17",
-    "breed": "Shih Tzu",
-    "age": "3 months",
-    "gender": "Female",
-    "price": 1476,
-    "location": "Portland, OR",
-    "image": "https://placedog.net/500?id=17"
-  },
-  {
-    "id": "dog18",
-    "breed": "Pug",
-    "age": "5 months",
-    "gender": "Female",
-    "price": 860,
-    "location": "Portland, OR",
-    "image": "https://placedog.net/500?id=18"
-  },
-  {
-    "id": "dog19",
-    "breed": "Maltese",
-    "age": "4 months",
-    "gender": "Female",
-    "price": 1379,
-    "location": "Brooklyn, NY",
-    "image": "https://placedog.net/500?id=19"
-  },
-  {
-    "id": "dog20",
-    "breed": "Boston Terrier",
-    "age": "4 months",
-    "gender": "Female",
-    "price": 893,
-    "location": "Portland, OR",
-    "image": "https://placedog.net/500?id=20"
-  },
-  {
-    "id": "dog21",
-    "breed": "Cavalier King Charles",
-    "age": "6 months",
-    "gender": "Male",
-    "price": 1365,
-    "location": "Phoenix, AZ",
-    "image": "https://placedog.net/500?id=21"
-  },
-  {
-    "id": "dog22",
-    "breed": "Border Collie",
-    "age": "4 months",
-    "gender": "Female",
-    "price": 960,
-    "location": "Seattle, WA",
-    "image": "https://placedog.net/500?id=22"
-  },
-  {
-    "id": "dog23",
-    "breed": "Bichon Frise",
-    "age": "5 months",
-    "gender": "Male",
-    "price": 832,
-    "location": "Seattle, WA",
-    "image": "https://placedog.net/500?id=23"
-  },
-  {
-    "id": "dog24",
-    "breed": "Akita",
-    "age": "6 months",
-    "gender": "Male",
-    "price": 1017,
-    "location": "Los Angeles, CA",
-    "image": "https://placedog.net/500?id=24"
-  },
-  {
-    "id": "dog25",
-    "breed": "Samoyed",
-    "age": "5 months",
-    "gender": "Male",
-    "price": 822,
-    "location": "Seattle, WA",
-    "image": "https://placedog.net/500?id=25"
-  },
-  {
-    "id": "dog26",
-    "breed": "Weimaraner",
-    "age": "2 months",
-    "gender": "Female",
-    "price": 1443,
-    "location": "Seattle, WA",
-    "image": "https://placedog.net/500?id=26"
-  },
-  {
-    "id": "dog27",
-    "breed": "Bernese Mountain Dog",
-    "age": "2 months",
-    "gender": "Male",
-    "price": 1494,
-    "location": "Austin, TX",
-    "image": "https://placedog.net/500?id=27"
-  },
-  {
-    "id": "dog28",
-    "breed": "Basenji",
-    "age": "3 months",
-    "gender": "Female",
-    "price": 1146,
-    "location": "Portland, OR",
-    "image": "https://placedog.net/500?id=28"
-  },
-  {
-    "id": "dog29",
-    "breed": "Alaskan Malamute",
-    "age": "2 months",
-    "gender": "Female",
-    "price": 1439,
-    "location": "Denver, CO",
-    "image": "https://placedog.net/500?id=29"
-  },
-  {
-    "id": "dog30",
-    "breed": "Whippet",
-    "age": "5 months",
-    "gender": "Male",
-    "price": 997,
-    "location": "Los Angeles, CA",
-    "image": "https://placedog.net/500?id=30"
-  }
-  ];
+  <!-- JS -->
+  <script>
+    const dogs = [
+      { id: "dog01", breed: "Golden Retriever", age: "2 months", gender: "Male", price: 1396, location: "Atlanta, GA", image: "https://placedog.net/500?id=1" },
+      { id: "dog02", breed: "French Bulldog", age: "3 months", gender: "Female", price: 1073, location: "Denver, CO", image: "https://placedog.net/500?id=2" },
+      { id: "dog03", breed: "German Shepherd", age: "5 months", gender: "Female", price: 1476, location: "Austin, TX", image: "https://placedog.net/500?id=3" },
+      { id: "dog04", breed: "Poodle", age: "5 months", gender: "Male", price: 939, location: "Portland, OR", image: "https://placedog.net/500?id=4" },
+      { id: "dog05", breed: "Bulldog", age: "3 months", gender: "Female", price: 1038, location: "Brooklyn, NY", image: "https://placedog.net/500?id=5" },
+      { id: "dog06", breed: "Beagle", age: "3 months", gender: "Female", price: 1415, location: "Los Angeles, CA", image: "https://placedog.net/500?id=6" },
+      { id: "dog07", breed: "Rottweiler", age: "3 months", gender: "Female", price: 1158, location: "Brooklyn, NY", image: "https://placedog.net/500?id=7" },
+      { id: "dog08", breed: "Dachshund", age: "6 months", gender: "Female", price: 1489, location: "Austin, TX", image: "https://placedog.net/500?id=8" },
+      { id: "dog09", breed: "Great Dane", age: "3 months", gender: "Female", price: 1055, location: "Atlanta, GA", image: "https://placedog.net/500?id=9" },
+      { id: "dog10", breed: "Siberian Husky", age: "6 months", gender: "Female", price: 1006, location: "Atlanta, GA", image: "https://placedog.net/500?id=10" },
+      { id: "dog11", breed: "Labrador Retriever", age: "2 months", gender: "Female", price: 1320, location: "Los Angeles, CA", image: "https://placedog.net/500?id=11" },
+      { id: "dog12", breed: "Chihuahua", age: "6 months", gender: "Female", price: 1353, location: "Portland, OR", image: "https://placedog.net/500?id=12" },
+      { id: "dog13", breed: "Doberman", age: "6 months", gender: "Female", price: 894, location: "Chicago, IL", image: "https://placedog.net/500?id=13" },
+      { id: "dog14", breed: "Cocker Spaniel", age: "3 months", gender: "Male", price: 1071, location: "Miami, FL", image: "https://placedog.net/500?id=14" },
+      { id: "dog15", breed: "Boxer", age: "4 months", gender: "Female", price: 1096, location: "Denver, CO", image: "https://placedog.net/500?id=15" },
+      { id: "dog16", breed: "Australian Shepherd", age: "3 months", gender: "Male", price: 1361, location: "Austin, TX", image: "https://placedog.net/500?id=16" },
+      { id: "dog17", breed: "Shih Tzu", age: "3 months", gender: "Female", price: 1476, location: "Portland, OR", image: "https://placedog.net/500?id=17" },
+      { id: "dog18", breed: "Pug", age: "5 months", gender: "Female", price: 860, location: "Portland, OR", image: "https://placedog.net/500?id=18" },
+      { id: "dog19", breed: "Maltese", age: "4 months", gender: "Female", price: 1379, location: "Brooklyn, NY", image: "https://placedog.net/500?id=19" },
+      { id: "dog20", breed: "Boston Terrier", age: "4 months", gender: "Female", price: 893, location: "Portland, OR", image: "https://placedog.net/500?id=20" },
+      { id: "dog21", breed: "Cavalier King Charles", age: "6 months", gender: "Male", price: 1365, location: "Phoenix, AZ", image: "https://placedog.net/500?id=21" },
+      { id: "dog22", breed: "Border Collie", age: "4 months", gender: "Female", price: 960, location: "Seattle, WA", image: "https://placedog.net/500?id=22" },
+      { id: "dog23", breed: "Bichon Frise", age: "5 months", gender: "Male", price: 832, location: "Seattle, WA", image: "https://placedog.net/500?id=23" },
+      { id: "dog24", breed: "Akita", age: "6 months", gender: "Male", price: 1017, location: "Los Angeles, CA", image: "https://placedog.net/500?id=24" },
+      { id: "dog25", breed: "Samoyed", age: "5 months", gender: "Male", price: 822, location: "Seattle, WA", image: "https://placedog.net/500?id=25" },
+      { id: "dog26", breed: "Weimaraner", age: "2 months", gender: "Female", price: 1443, location: "Seattle, WA", image: "https://placedog.net/500?id=26" },
+      { id: "dog27", breed: "Bernese Mountain Dog", age: "2 months", gender: "Male", price: 1494, location: "Austin, TX", image: "https://placedog.net/500?id=27" },
+      { id: "dog28", breed: "Basenji", age: "3 months", gender: "Female", price: 1146, location: "Portland, OR", image: "https://placedog.net/500?id=28" },
+      { id: "dog29", breed: "Alaskan Malamute", age: "2 months", gender: "Female", price: 1439, location: "Denver, CO", image: "https://placedog.net/500?id=29" },
+      { id: "dog30", breed: "Whippet", age: "5 months", gender: "Male", price: 997, location: "Los Angeles, CA", image: "https://placedog.net/500?id=30" }
+    ];
 
-  const params = new URLSearchParams(window.location.search);
-  const dogId = params.get('id');
-  const container = document.getElementById('dog-details');
-  const dog = dogs.find(d => d.id === dogId);
+    const container = document.getElementById('dog-listings');
 
-  if (!dog) {
-    container.innerHTML = '<p class="text-red-500 text-lg">Dog not found.</p>';
-  } else {
-    container.innerHTML = `
-      <img src="${dog.image}" alt="${dog.breed}" class="w-full md:w-1/2 h-80 object-cover rounded-xl" />
-      <div class="md:w-1/2 space-y-4">
-        <div class="flex items-center gap-2 text-green-600 font-semibold text-sm">
-          <span>✅ Verified by Dog Marketplace</span>
+    function renderDogs(list) {
+      container.innerHTML = list.map(dog => `
+        <div class="card bg-white p-4 rounded-xl shadow hover:shadow-xl transition duration-300">
+          <img src="${dog.image}" alt="${dog.breed}" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h2 class="text-lg font-bold">${dog.breed}</h2>
+          <p class="text-gray-600 text-sm">Age: ${dog.age}</p>
+          <p class="text-gray-600 text-sm">Gender: ${dog.gender}</p>
+          <p class="text-gray-600 text-sm">Location: ${dog.location}</p>
+          <p class="text-yellow-600 font-semibold mt-2">$${dog.price}</p>
+          <a href="dog-details.html?id=${dog.id}" class="block mt-4 text-center bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 rounded-lg shadow">
+            View Details
+          </a>
         </div>
-        <h2 class="text-3xl font-bold">${dog.breed}</h2>
-        <p class="text-gray-700">Age: <strong>${dog.age}</strong></p>
-        <p class="text-gray-700">Gender: <strong>${dog.gender}</strong></p>
-        <p class="text-gray-700">Location: <strong>${dog.location}</strong></p>
-        <p class="text-yellow-700 font-bold text-xl">Price: $${dog.price}</p>
-
-        <hr class="my-4">
-
-        <div class="space-y-2">
-          <h3 class="text-lg font-semibold">Dog Documents:</h3>
-          <ul class="list-disc list-inside text-gray-600">
-            <li>Vaccination Certificate</li>
-            <li>Health Check Report</li>
-            <li>Breed Certification</li>
-            <li>Seller Verification Certificate</li>
-          </ul>
-        </div>
-
-        <div class="space-y-2 mt-6">
-          <h3 class="text-lg font-semibold">Everything You Need to Know:</h3>
-          <ul class="list-disc list-inside text-gray-600">
-            <li>This dog has passed all health & breed verifications.</li>
-            <li>70% payment is required before dispatching.</li>
-            <li>Delivery is secure, tracked, and insured.</li>
-            <li>Support available during entire delivery process.</li>
-          </ul>
-        </div>
-
-        <a href="buy.html?id=${dog.id}" class="block text-center mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 rounded-xl shadow">
-          Buy This Dog
-        </a>
-      </div>
-    `;
-  }
-
-  // Loader & Page Transition
-  window.addEventListener("load", () => {
-    document.getElementById("loader").style.opacity = "0";
-    setTimeout(() => {
-      document.getElementById("loader").style.display = "none";
-    }, 500);
-  });
-
-  document.querySelectorAll("a").forEach(link => {
-    const href = link.getAttribute("href");
-    if (href && !href.startsWith("#") && !link.hasAttribute("target")) {
-      link.addEventListener("click", e => {
-        e.preventDefault();
-        document.documentElement.classList.add("fade-out");
-        setTimeout(() => {
-          window.location = href;
-        }, 300);
-      });
+      `).join('');
     }
-  });
-</script>
 
+    // Initial render
+    renderDogs(dogs);
+
+    // Populate location filter
+    const locationFilter = document.getElementById('location-filter');
+    const uniqueLocations = [...new Set(dogs.map(dog => dog.location))];
+    uniqueLocations.forEach(loc => {
+      const option = document.createElement('option');
+      option.value = loc;
+      option.textContent = loc;
+      locationFilter.appendChild(option);
+    });
+
+    // Filters
+    const searchInput = document.getElementById('search');
+    const genderFilter = document.getElementById('gender-filter');
+
+    function applyFilters() {
+      const searchText = searchInput.value.toLowerCase();
+      const selectedGender = genderFilter.value;
+      const selectedLocation = locationFilter.value;
+
+      const filtered = dogs.filter(dog =>
+        dog.breed.toLowerCase().includes(searchText) &&
+        (selectedGender === '' || dog.gender === selectedGender) &&
+        (selectedLocation === '' || dog.location === selectedLocation)
+      );
+
+      renderDogs(filtered);
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    genderFilter.addEventListener('change', applyFilters);
+    locationFilter.addEventListener('change', applyFilters);
+
+    window.addEventListener("load", () => {
+      document.getElementById("loader").style.opacity = "0";
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+      }, 500);
+    });
+
+    document.querySelectorAll("a").forEach(link => {
+      const href = link.getAttribute("href");
+      if (href && !href.startsWith("#") && !link.hasAttribute("target")) {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          document.documentElement.classList.add("fade-out");
+          setTimeout(() => {
+            window.location = href;
+          }, 300);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
