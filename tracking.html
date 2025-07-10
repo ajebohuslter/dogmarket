@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Your Puppy - Dog Marketplace</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .tracking-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: linear-gradient(135deg, #fffef7, #fff3cd);
+    }
+    .tracking-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    }
+    body {
+      background: linear-gradient(to right top, #fefce8, #fffbe6);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-gray-800">
+  <header class="bg-yellow-100 py-6 shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+      <h1 class="text-3xl font-bold text-yellow-700">Track Your Puppy</h1>
+      <a href="index.html" class="text-yellow-600 hover:underline">&larr; Back to Home</a>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto py-12 px-4">
+    <div class="bg-white p-8 rounded-3xl shadow-xl tracking-card">
+      <h2 class="text-2xl font-bold mb-4">Enter Your Tracking ID</h2>
+      <form id="trackingForm" class="space-y-6">
+        <input type="text" id="trackingId" placeholder="e.g., DMK12345678" required class="w-full p-4 border border-yellow-300 rounded-xl text-lg">
+        <button type="submit" class="bg-yellow-500 text-white px-6 py-3 rounded-xl text-lg hover:bg-yellow-600">Track</button>
+      </form>
+
+      <div id="trackingResult" class="mt-10 hidden">
+        <h3 class="text-xl font-semibold mb-2">Tracking Information</h3>
+        <div class="bg-yellow-50 p-6 rounded-xl shadow-inner">
+          <p><strong>Status:</strong> <span id="status">In Transit</span></p>
+          <p><strong>Breed:</strong> <span id="breed">Labrador Retriever</span></p>
+          <p><strong>Estimated Delivery:</strong> <span id="delivery">July 15, 2025</span></p>
+          <p><strong>Location:</strong> <span id="location">Pennsylvania Distribution Center</span></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center text-sm py-6 text-gray-500">
+    &copy; 2025 Dog Marketplace - Powered by trust, based in New York, USA.
+  </footer>
+
+  <script>
+    document.getElementById("trackingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const result = document.getElementById("trackingResult");
+      result.classList.remove("hidden");
+
+      // Simulated tracking info (dynamic fetching can be added with backend later)
+      const statusOptions = ["Preparing for Shipment", "In Transit", "Out for Delivery", "Delivered"];
+      const locations = ["New York Dispatch Center", "Pennsylvania Distribution Center", "Ohio Warehouse", "In Transit to California"];
+      const breeds = ["Labrador Retriever", "Poodle", "German Shepherd", "French Bulldog", "Golden Retriever"];
+
+      document.getElementById("status").innerText = statusOptions[Math.floor(Math.random() * statusOptions.length)];
+      document.getElementById("location").innerText = locations[Math.floor(Math.random() * locations.length)];
+      document.getElementById("breed").innerText = breeds[Math.floor(Math.random() * breeds.length)];
+
+      const date = new Date();
+      date.setDate(date.getDate() + Math.floor(Math.random() * 5 + 1));
+      document.getElementById("delivery").innerText = date.toDateString();
+    });
+  </script>
+</body>
+</html>
